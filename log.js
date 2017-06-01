@@ -5,6 +5,8 @@ var EE = require('events').EventEmitter
 var log = exports = module.exports = new EE()
 var util = require('util')
 
+console.log("test");
+
 var setBlocking = require('set-blocking')
 var consoleControl = require('console-control-strings')
 
