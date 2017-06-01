@@ -1,6 +1,8 @@
 var log = require('./log.js')
 
 log.heading = 'npm'
+log.disableColor()
+log.heading = () => { return new Date().toISOString() };
 
 console.error('log.level=silly')
 log.level = 'silly'

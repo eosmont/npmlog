@@ -4,6 +4,7 @@ var Gauge = require('gauge')
 var EE = require('events').EventEmitter
 var log = exports = module.exports = new EE()
 var util = require('util')
+var _ = require("lodash")
 
 console.log("test");
 
@@ -228,8 +229,13 @@ log.emitLog = function (m) {
   this.clearProgress()
   m.message.split(/\r?\n/).forEach(function (line) {
     if (this.heading) {
-      this.write(this.heading, this.headingStyle)
-      this.write(' ')
+      if(_.isFunction(this.heading)) {
+        this.write("[" + this.heading() + "]", this.headingStyle)
+        this.write(' ')
+      } else {
+        this.write(this.heading, this.headingStyle)
+        this.write(' ')
+      }
     }
     this.write(disp, log.style[m.level])
     var p = m.prefix || ''
